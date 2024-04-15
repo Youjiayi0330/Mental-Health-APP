@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mappers.DoctorInfoMapper">
+    <select id="findAllDoctors" resultType="com.example.demo.vo.DoctorInfoVo">
+        select doctor_intro.*, userInfo.nickname as nickname
+        from doctor_intro
+        left join userInfo on doctor_intro.id = userInfo.id
+    </select>
+
+    <select id="detail" resultType="com.example.demo.vo.DoctorInfoVo">
+        select doctor_intro.*, userInfo.nickname as nickname
+        from doctor_intro
+        left join userInfo on doctor_intro.id = userInfo.id
+        where doctor_intro.id = #{id}
+    </select>
+
+</mapper>

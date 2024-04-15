@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ChatMainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:gravity="center"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:hint="小王"
+            android:gravity="center"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:id="@+id/chat_message_name"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:src="@drawable/detail"
+            android:scaleType="center"
+            android:id="@+id/chat_message_detial"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:id="@+id/chat_message_recycleview"
+        android:layout_height="0dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:paddingHorizontal="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_height="40dp"
+        android:background="@color/white">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:textSize="20sp"
+            android:id="@+id/chat_message_edit"
+            android:background="@drawable/editstyle"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/chat_message_send"
+            android:background="@drawable/chat_send_normal"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+</LinearLayout>

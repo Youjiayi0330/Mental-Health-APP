@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:gravity="right"
+    android:paddingEnd="8dp">
+
+    <TextView
+        android:id="@+id/chat_message_right_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/chat_right"
+        android:maxWidth="300dp"
+        android:maxHeight="300dp"
+        android:padding="8dp"
+        android:text="你好"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/chat_message_right_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="top"
+        android:src="@drawable/default_head_image"/>
+
+</LinearLayout>

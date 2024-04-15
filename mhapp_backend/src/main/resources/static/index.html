@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html html xmlns="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml"
+      xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="content-type" content="no-cache, must-revalidate" />
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT"/>
+    <title>首页</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/font-awesome.css" rel="stylesheet"/>
+    <link href="css/basic.css" rel="stylesheet"/>
+    <link href="css/custom.css" rel="stylesheet"/>
+    <link href="css/my.css" rel="stylesheet"/>
+    <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.4/quill.bubble.css" rel="stylesheet">
+    <link href="css/element/index.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        /*.ql-snow .ql-editor img {*/
+        /*    width: 400px;*/
+        /*}*/
+    </style>
+</head>
+
+<body>
+<div id="wrapper" >
+    <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">心理健康科普APP后台管理</a>
+        </div>
+
+        <div class="header-right">
+            <a href="javascript:void(0)" class="btn btn-info" title="退出登录">
+                <i class="fa fa-sign-out fa-2x"></i>
+            </a>
+        </div>
+
+        <div class="header-right" style="padding-top: 25px">欢迎你</div>
+
+        <div class="header-left">
+            <a href="index.html" class="btn btn-info" title="跳转到首页">
+                <i class="fa fa-dot-circle-o fa-2x"></i>
+            </a>
+        </div>
+    </nav>
+    <!-- /. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a class="active-menu" href="index.html"><i class="fa fa-dashboard " ></i>系统首页</a>
+                </li>
+                <li>
+                    <a href="addPassage.html"><i class="fa fa-dashboard " ></i>添加文章</a>
+                </li>
+                <li>
+                    <a href="hasSended.html"><i class="fa fa-dashboard " ></i>已发送</a>
+                </li>
+                <li>
+                    <a href="draft.html"><i class="fa fa-dashboard " ></i>草稿箱</a>
+                </li>
+                <li>
+                    <a href="userInfo.html"><i class="fa fa-dashboard " ></i>用户管理</a>
+                </li>
+                <li>
+                    <a href="paperShow.html"><i class="fa fa-dashboard " ></i>问卷管理</a>
+                </li>
+                <li>
+                    <a href="noteShow.html"><i class="fa fa-dashboard " ></i>社区管理</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <el-card class="box-card" style="margin-left: 20px;margin-top:20px" >
+                    <div slot="header" class="clearfix">
+                        <span>实时访问量</span>
+                    </div>
+                    <div class="text item">
+                        <input id="userCount" style="border: none; background-color: transparent; width: 500px" readonly>
+                    </div>
+                </el-card>
+                <el-card class="box-card" style="margin-left: 20px ; margin-top:20px" >
+                    <div slot="header" class="clearfix">
+                        <span>热门文章</span>
+                    </div>
+                    <div class="text item">
+                        <input id="popPassage" style="border: none; background-color: transparent; width: 500px" readonly>
+                    </div>
+                </el-card>
+            </div>
+            <div class="row">
+                <el-card class="box-card" style="margin-left: 20px; margin-top:20px" >
+                    <div slot="header" class="clearfix">
+                        <span>热门分享贴</span>
+                    </div>
+                    <div class="text item">
+                        <input id="popNote" style="border: none; background-color: transparent; width: 500px" readonly>
+                    </div>
+                </el-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.metisMenu.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/my.js"></script>
+<script src="js/vue2.6.11/vue.js"></script>
+<script src="js/vue2.6.11/axios.js"></script>
+<!--<script src="js/quill.js"></script>-->
+<script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
+<script src="https://cdn.quilljs.com/1.3.4/quill.min.js"></script>
+<script src="js/element/index.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<script>
+    function msg(type, msg) {
+        Vue.prototype.$message({
+            type: type, // success（成功）、warning（警告）, error(错误)
+            message: msg,
+            duration: 2000,
+            offset: 100,
+            center: true,
+        })
+    }
+
+    let wrapper=new Vue({
+        el: '#wrapper' ,
+        data:{
+            entity: {},
+            user:{},
+        },
+        created: function () {
+            this.loadData()
+        },
+        methods: {
+            cancel:function(){
+                console.log("点击取消")
+
+            },
+            loadData(){
+                showUserCount();
+                showPopPassage();
+                showPopNote();
+            }
+        }
+    });
+    function showUserCount() {
+        let url = "/popmh/person/findVisitNum";
+        axios.get(url).then(res => {
+            if (res.data !== '') {
+                $("#userCount").val(res.data.data);
+            } else {
+                // msg('error', "加载失败");
+            }
+        });
+    };
+    function showPopPassage() {
+        let url = "/popmh/passage/findPopPassage";
+        axios.get(url).then(res => {
+            if (res.data !== '') {
+                $("#popPassage").val(res.data.data);
+            } else {
+               // msg('error', "加载失败");
+            }
+        });
+    };
+    function showPopNote() {
+        let url = "/popmh/noteInfo/findPopNote";
+        axios.get(url).then(res => {
+            if (res.data !== '') {
+                $("#popNote").val(res.data.data);
+            } else {
+                // msg('error', "加载失败");
+            }
+        });
+    }
+</script>
+<style>
+    .text {
+        font-size: 14px;
+    }
+
+    .item {
+        margin-bottom: 18px;
+    }
+
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+    }
+    .clearfix:after {
+        clear: both
+    }
+
+    .box-card {
+        width: 480px;
+    }
+</style>
+</body>
+</html>

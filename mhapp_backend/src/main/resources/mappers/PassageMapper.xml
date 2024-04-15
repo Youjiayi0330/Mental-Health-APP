@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mappers.PassageMapper">
+    <!--查找所有文章-->
+    <select id="findAllPassages" resultType="com.example.demo.vo.PassageVo">
+        select * from passage where pstatus=1
+    </select>
+    <!-- 查找草稿箱的文章，pstatus=0 -->
+    <select id="findDraft" resultType="com.example.demo.entity.Passage">
+        select pid,ptitle,ptime,pcontent
+        from passage
+        where pstatus = 0
+    </select>
+    <!-- 查找已发送的文章，pstatus=1 -->
+    <select id="findSended" resultType="com.example.demo.entity.Passage">
+        select pid,ptitle,ptime,pcontent
+        from passage
+        where pstatus = 1
+    </select>
+    <!-- 根据文章标题查询草稿箱文章 -->
+    <select id="findByDraftName" resultType="com.example.demo.entity.Passage">
+        select pid,ptitle,ptime,pcontent
+        from passage
+        where ptitle like concat('%',#{ptitle},'%') and pstatus=0
+    </select>
+    <!-- 根据文章标题查询已发布文章 -->
+    <select id="findBySendedName" resultType="com.example.demo.vo.PassageVo">
+        select pid,ptitle,ptime,pcontent,fileName
+        from passage
+        where ptitle like concat('%',#{ptitle},'%') and pstatus=1
+    </select>
+</mapper>

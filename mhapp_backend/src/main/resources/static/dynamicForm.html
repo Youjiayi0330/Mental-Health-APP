@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="css/element/index.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <meta charset="UTF-8">
+    <title>编写问卷</title>
+</head>
+<body>
+<div class="medical_treatment" id="sum">
+    <h4 style="margin-left: 10px; padding-bottom: 2px">问卷名</h4><input id="paperName" style="width: 400px; height: 30px;margin-left: 10px; "/>
+
+    <div id="milo" >
+        <form action="" method="post" autocomplete="off" id="checkBody0"
+              style="margin-left: 10px; margin-top: 10px; ">
+            <button id="btn0" class="new" type="button" style="background-color:#f0ad4e; border-radius:3px; border:0px" onclick="addAnswer(this.id)">添加选项</button>
+            <table id="questionForm" cellspacing="0">
+                <tr style="background-color: #3a8ee6">
+                    <th class="paragraph_t" colspan="4" >问题消息
+                        <div class="layui-btn-group" style="float:left">
+
+                        </div>
+                        <div class="layui-btn-group" style="float:right">
+                            <button type="button" style="background-color:#f0ad4e; border-radius:3px; border:0px" onclick="addFrom();">添加问题</button>
+                            <button id="deleteRow" style="display: none" type="button" style="background-color:#f0ad4e; border-radius:3px; border:0px" onclick="deleteFrom();">删除</i></button>
+                        </div>
+                    </th>
+                </tr>
+                <!--第一份-->
+                <tr style="background-color: #8cc5ff">
+                    <th>问题</th>
+                    <th colspan="3">
+                      <input type="text" name="question" id="question" placeholder="请输入问题" v-model="questionForm.question"/>
+                    </th>
+                </tr>
+
+                <tr id="answer0" style="background-color: #8cc5ff">
+                    <th>选项</th>
+                    <td><input type="text" name="answer0"  id="answer" placeholder="请输入选项" /></td>
+                    <th>得分</th>
+                    <td><input type="text" name="score0" id="score" placeholder="请输入选项得分" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <button id="submit" style="margin-left: 10px; margin-top: 20px; background-color: #f0ad4e; border-radius:3px; border:0px" type="button" class="submit-button" @click="saveModel()">提交</button>
+</div>
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.metisMenu.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/my.js"></script>
+<script src="js/vue2.6.11/vue.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>-->
+<script src="js/vue2.6.11/axios.js"></script>
+<script src="js/quill.js"/>
+<script src="js/element/index.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    function msg(type, msg) {
+        Vue.prototype.$message({
+            type: type, // success（成功）、warning（警告）, error(错误)
+            message: msg,
+            duration: 2000,
+            offset: 100,
+            center: true
+        })
+    }
+
+    function addAnswer(id) {
+        let length = ($("input").length -1 - $("form").length) / 2;
+        let $tr = $("#answer0");
+        let newAnswer = $tr.clone();
+        newAnswer.attr("id",'answer'+length);
+        newAnswer.find(":input").not(":button").each(function (i) { //循环新克隆form表单在里边找到所有的input标签，
+            if ($(this).not(":radio").length > 0) {
+                $(this).val(""); //给不是radio框的inputvalue赋值为空
+            }
+        });
+        console.log(id.toString());
+        $("#"+"checkBody"+id.substring(id.length-1)).children("#questionForm").append(newAnswer)
+        //$("#"+"checkBody"+ ($("form").length-1).toString()).children("#questionForm").append(newAnswer)
+
+    }
+
+    /**
+     * 克隆form
+     */
+    function addFrom() {
+        //子form表单的数量
+        let length = $("form").length ;
+        //要克隆的form表单
+         let $form = $("#checkBody0");
+        // $form.getElementsByClassName('new')[0].id = "btn"+length.toString();
+        //克隆好的form表单
+        let newForm = $form.clone();
+        //设置动态id
+        newForm.attr("id",'checkBody'+length)
+        //newForm.getElementsByClassName('new')[0].id = "btn"+length.toString()
+        newForm.find(":input").not(":button").each(function (i) { //循环新克隆form表单在里边找到所有的input标签，
+            if ($(this).not(":radio").length > 0) {
+                $(this).val(""); //给不是radio框的inputvalue赋值为空
+            }
+        });
+        //追加
+        $("#milo").append(newForm);
+        $("#"+"checkBody"+ length.toString()).children("#btn0").attr("id","btn"+length.toString());
+        //重新获取子form表单的数量
+        var showlength = $("form").length ;
+        //如果数量大于2，删除按钮显示
+        if (showlength >= 2) {
+            let $id = $('[id=deleteRow]');
+            $id.last().show();
+        }
+    }
+
+    /**
+     * 删除from
+     */
+    function deleteFrom() {
+        //获取子form表单数量
+        let length = $("form").length - 1;
+        //获取最后一个子form表单位置
+        let tab = $("form:eq(" + length + ")");
+        tab.remove(); //删除
+        let showlength = $("form").length - 1;
+        //隐藏删除按钮
+        if (showlength <= 1) {
+            $("#deleteRow").hide();
+        }
+    }
+
+    $("#submit").click(function () {
+        //获取基础数据
+        //let basicData = $("#applyForm").serializeArray();
+        //定义数组，接收动态添加的子form表单的值
+        let newData = []
+        let length = $("form").length ;
+        //获取子form表单的值
+        for (let i = 0; i < length; i++) {
+            if ($("#checkBody"+i).serialize() !== '') {
+                //根据id获取
+                let newFormData = $("#checkBody"+i).serializeArray();
+                console.log(newFormData);
+                //更加serializeArray获取后的格式重新拼装，方面后台处理数据
+                let newFormObj = {};
+                let answerData = [];
+                newFormObj["question"] = newFormData[0].value;
+                for (let j = 1; j <newFormData.length ; j++) {
+                    let answerObj = {};
+                    let Element = newFormData[j];
+                    //let name1 = Element.name;
+                    //let value = Element.value;
+                    answerObj["answer"] = Element.value;
+                    j = j+1;
+                    let Element1 = newFormData[j];
+                    answerObj["score"] = Element1.value;
+                    answerData.push(JSON.stringify(answerObj))
+                }
+                newFormObj["answerList"] = answerData;
+                newData.push(JSON.stringify(newFormObj))//追加数组  只追加不为空的form（未删除的form）
+                console.log(newData)
+            }
+        }
+        let checkBodyObj = {}
+        checkBodyObj.name = $("#paperName").val();
+        checkBodyObj.value = JSON.stringify(newData);
+        //basicData.push(checkBodyObj)
+        //console.log(checkBodyObj)
+        if(1==1){
+            axios.post(
+                "/popmh/paper", checkBodyObj
+            ).then(res => {
+                if (res.data.code === '0') {
+                    msg('success', '添加成功');
+                } else {
+                    msg('error', res.data);
+                }
+            })
+
+        }
+    })
+
+    // function saveModel() {
+    //     //获取基础数据
+    //     //let basicData = $("#applyForm").serializeArray();
+    //     //定义数组，接收动态添加的子form表单的值
+    //     let newData = []
+    //     let length = $("form").length ;
+    //     //获取子form表单的值
+    //     for (let i = 0; i < length; i++) {
+    //         if ($("#checkBody"+i).serialize() !== '') {
+    //             //根据id获取
+    //             let newFormData = $("#checkBody"+i).serializeArray();
+    //             console.log(newFormData);
+    //             //更加serializeArray获取后的格式重新拼装，方面后台处理数据
+    //             let newFormObj = {};
+    //             let answerData = [];
+    //             newFormObj["question"] = newFormData[0].value;
+    //             for (let j = 1; j <newFormData.length ; j++) {
+    //                 let answerObj = {};
+    //                 let Element = newFormData[j];
+    //                 //let name1 = Element.name;
+    //                 //let value = Element.value;
+    //                 answerObj["answer"] = Element.value;
+    //                 j = j+1;
+    //                 let Element1 = newFormData[j];
+    //                 answerObj["score"] = Element1.value;
+    //                 answerData.push(JSON.stringify(answerObj))
+    //             }
+    //             newFormObj["answerList"] = answerData;
+    //             newData.push(JSON.stringify(newFormObj))//追加数组  只追加不为空的form（未删除的form）
+    //             console.log(newData)
+    //         }
+    //     }
+    //     let checkBodyObj = {}
+    //     checkBodyObj.name = $("#paperName").val();
+    //     checkBodyObj.value = JSON.stringify(newData);
+    //     //basicData.push(checkBodyObj)
+    //     //console.log(checkBodyObj)
+    //     if(1==1){
+    //         axios.post(
+    //             "/popmh/paper", checkBodyObj
+    //         ).then(res => {
+    //             if (res.data.code === '0') {
+    //                 msg('success', '添加成功');
+    //             } else {
+    //                 msg('error', res.data);
+    //             }
+    //         })
+    //
+    //     }
+    // }
+
+
+</script>
+</body>
+</html>

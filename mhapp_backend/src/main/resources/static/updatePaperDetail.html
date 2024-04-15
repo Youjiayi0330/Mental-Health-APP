@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="css/element/index.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <meta charset="UTF-8">
+    <title>问卷详情</title>
+</head>
+<body>
+<div class="medical_treatment" id="sum">
+    <h4 style="margin-left: 10px; padding-bottom: 2px">问卷名</h4><input id="paperName" style="width: 400px; height: 30px;margin-left: 10px; "/>
+    <div id="milo" >
+        <form action="" method="post" autocomplete="off" id="checkBody"
+              style="margin-left: 10px; margin-top: 10px; background-color: #8cc5ff; display: none" >
+            问题名<input id="question" type="text" name="question" style="margin-left: 5px; background-color: #8cc5ff; border: none"/>
+                 <input id="questionId" type="text" name="questionId" style="display: none"/><br>
+            <img id="img"src="answerBtn.png" width="12">
+            <input id="answerId" name="answerId" type="text" style="display: none">
+            <input id="answer" name="answer" type="text" style="margin-left: 5px; width: 200px">
+            <input id="score" name="score" type="text" style="margin-left: 5px"/><br>
+        </form>
+    </div>
+    <button id="submit" style="margin-left: 10px; margin-top: 20px; background-color: #f0ad4e; border-radius:3px; border:0px"
+            type="button" class="submit-button" >提交</button>
+</div>
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.metisMenu.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/my.js"></script>
+<script src="js/vue2.6.11/vue.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>-->
+<script src="js/vue2.6.11/axios.js"></script>
+<script src="js/quill.js"/>
+<script src="js/element/index.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    function msg(type, msg) {
+        Vue.prototype.$message({
+            type: type, // success（成功）、warning（警告）, error(错误)
+            message: msg,
+            duration: 2000,
+            offset: 100,
+            center: true
+        })
+    }
+
+
+    let wrapper = new Vue({
+        data:{
+            paperId:'',
+            paperName: ''
+        },
+        created: function () {
+            this.paperId = this.getQueryVariable("id");
+            this.loadData();
+        },
+        methods: {
+            getQueryVariable(variable) {
+                let query = window.location.search.substring(1);
+                let vars = query.split("&");
+                for (let i = 0; i < vars.length; i++) {
+                    let pair = vars[i].split("=");
+                    if (pair[0] === variable) {
+                        return pair[1];
+                    }
+                }
+                return '1';
+            },
+            loadData(){
+                loadPaperName(this.paperId);
+                loadQuestion(this.paperId,this.paperName);
+            }
+        }
+    })
+
+    function loadPaperName(paperId) {
+        let url = "/popmh/paper/findPaperName/" + paperId;
+        axios.get(url).then(res => {
+            if(res.data.code === '0'){
+                $("#paperName").val(res.data.data)
+            }
+        })
+    }
+
+    function loadQuestion(paperId,paperName) {
+        $("#paperName").val(paperName)
+        console.log(paperId);
+        let questionList = [];
+        let url = "/popmh/paper/findQuestion/" + paperId;
+        axios.get(url).then(res => {
+            if (res.data.code === '0') {
+                questionList = res.data.data;
+                console.log(questionList);
+                let length = questionList.length;
+                console.log(length);
+                for(let i=0; i<length; i++){
+                    let question ={};
+                    question = questionList[i];
+                    let $form = $("#checkBody");
+                    let newForm = $form.clone();
+                    newForm.attr("id",'checkBody'+i);
+                    $("#milo").append(newForm);
+                    $("#"+"checkBody"+i).show();
+                    console.log(question["questionTitle"]);
+                    $("#"+"checkBody"+i).children("#question").val(question["questionTitle"]);
+                    $("#"+"checkBody"+i).children("#questionId").val(question["id"]);
+                    loadAnswer(question["id"],i);
+                }
+            } else {
+                msg('error', res.data.msg);
+            }
+        });
+    }
+
+    function loadAnswer(questionId,i) {
+        let answerList = [];
+        let url = "/popmh/paper/findAnswer/" + questionId;
+        axios.get(url).then(res => {
+            if (res.data.code === '0') {
+                answerList = res.data.data;
+                let length = answerList.length;
+                let answer0 = {};
+                answer0 = answerList[0];
+                $("#"+"checkBody"+i).children("#answer").val(answer0["answer"]);
+                $("#"+"checkBody"+i).children("#score").val(answer0["value"]);
+                $("#"+"checkBody"+i).children("#answerId").val(answer0["id"]);
+                for(let j=1; j<length; j++){
+                    let answer = {};
+                    let $img = $("#img");
+                    let newImg = $img.clone();
+                    let $answerId = $("#answerId");
+                    let newAnswerId = $answerId.clone();
+                    newAnswerId.attr("id",'answerId'+j);
+                    let $tr = $("#answer");
+                    let newAnswer = $tr.clone();
+                    newAnswer.attr("id",'answer'+j);
+                    let $th = $("#score");
+                    let newScore = $th.clone();
+                    newScore.attr("id",'score'+j);
+                    answer = answerList[j];
+                    $("#"+"checkBody"+i).append(newImg);
+                    $("#"+"checkBody"+i).append(newAnswerId);
+                    $("#"+"checkBody"+i).append(newAnswer);
+                    $("#"+"checkBody"+i).append(newScore);
+                    $("#"+"checkBody"+i).append("</br>");
+                    $("#"+"checkBody"+i).children("#"+"answerId"+j).val(answer["id"]);
+                    $("#"+"checkBody"+i).children("#"+"answer"+j).val(answer["answer"]);
+                    $("#"+"checkBody"+i).children("#"+"score"+j).val(answer["value"]);
+                }
+            } else {
+                msg('error', res.data.msg);
+            }
+        });
+    }
+
+    $("#submit").click(function () {
+        let data = {};
+        let newData = []
+        let length = $("form").length ;
+        //获取子form表单的值
+        for (let i = 0; i < length; i++) {
+            if ($("#checkBody"+i).serialize() !== '') {
+                //根据id获取
+                let newFormData = $("#checkBody"+i).serializeArray();
+                console.log(newFormData);
+                //更加serializeArray获取后的格式重新拼装，方面后台处理数据
+                let newFormObj = {};
+                let answerData = [];
+                newFormObj["question"] = newFormData[0].value;
+                newFormObj["questionId"] = newFormData[1].value
+                for (let j = 2; j <newFormData.length ; j++) {
+                    let answerObj = {};
+                    let Element0 = newFormData[j];
+                    answerObj["answerId"] = Element0.value;
+                    j = j+1;
+                    let Element = newFormData[j];
+                    answerObj["answer"] = Element.value;
+                    j = j+1;
+                    let Element1 = newFormData[j];
+                    answerObj["score"] = Element1.value;
+                    answerData.push(JSON.stringify(answerObj))
+                }
+                newFormObj["answerList"] = answerData;
+                newData.push(JSON.stringify(newFormObj))//追加数组  只追加不为空的form（未删除的form）
+                console.log(newData)
+            }
+        }
+        let checkBodyObj = {}
+        checkBodyObj.id = wrapper.$data.paperId;
+        checkBodyObj.name = $("#paperName").val();
+        checkBodyObj.value = JSON.stringify(newData);
+        if(1==1){
+            axios.put(
+                "/popmh/paper", checkBodyObj
+            ).then(res => {
+                if (res.data.code === '0') {
+                    msg('success', '修改成功');
+                } else {
+                    msg('error', res.data);
+                }
+            })
+        }
+    })
+
+</script>
+
+</body>
+</html>

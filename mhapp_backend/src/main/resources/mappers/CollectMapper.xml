@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mappers.CollectMapper">
+    <select id="findIsCollect" resultType="com.example.demo.entity.CollectInfo">
+        select * from collect_passage
+        where passageId = #{passageId} and userId = #{userId}
+    </select>
+
+    <delete id="deleteByTwoId">
+        delete from collect_passage
+        where passageId = #{passageId} and userId = #{userId}
+    </delete>
+
+    <select id="findByUserId" resultType="com.example.demo.entity.CollectInfo">
+        select * from collect_passage
+        where userId = #{userId}
+    </select>
+
+    <select id="findByPassageId" resultType="java.lang.Integer">
+        select COUNT(userId)
+        from collect_passage
+        where passageId = #{passageId}
+    </select>
+</mapper>

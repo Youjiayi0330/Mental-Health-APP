@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mappers.PaperResultMapper">
+    <select id="findByUserId" resultType="com.example.demo.vo.PaperResultVo">
+        select * , paper.paperTitle as paperName
+        from paper_result left join paper on paper_result.paperId = paper.id
+        where paper_result.userId = #{userId}
+    </select>
+
+    <update id="updateById">
+        update paper_result
+        set paperScore = #{paperScore}, description = #{description}
+        where id = #{id}
+    </update>
+
+</mapper>

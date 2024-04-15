@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".passageDetail">
+
+    <TextView
+        android:id="@+id/ptitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="20dp"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/ptime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/ptitle"
+        android:textSize="15dp"
+        android:textColor="@android:color/darker_gray"/>
+    
+    <Button
+        android:id="@+id/collect_false"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="5dp"
+        android:background="@drawable/collect_false"/>
+
+    <Button
+        android:id="@+id/collect_true"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="5dp"
+        android:background="@drawable/collect_true"/>
+
+    <WebView
+        android:id="@+id/pcontent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ptime"
+        android:layout_marginTop="8dp"
+        android:textSize="15dp"
+        android:textColor="@color/black"/>
+    
+
+</RelativeLayout>

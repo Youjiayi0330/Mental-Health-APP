@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SearchPasage">
+
+    <android.widget.SearchView
+        android:id="@+id/search_searchView"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/search"
+        android:iconifiedByDefault="true"
+        android:queryHint="输入文章标题"  />
+
+    <Button
+        android:id="@+id/back_home"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_margin="5dp"
+        android:background="@drawable/order_btn"
+        android:text="返回首页"
+        android:textSize="15dp"
+        android:textColor="@color/white"/>
+
+    <ListView
+        android:id="@+id/search_passageList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_searchView"
+        android:layout_marginTop="5dp"/>
+
+</RelativeLayout>

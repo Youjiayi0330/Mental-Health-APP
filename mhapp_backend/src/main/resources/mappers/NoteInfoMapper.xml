@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mappers.NoteInfoMapper">
+    <select id="findAllNotes" resultType="com.example.demo.vo.NoteInfoVo">
+        select note.*, userinfo.nickname as userName, userinfo.identity as identity
+        from note
+        left join userinfo on note.userId = userinfo.id
+        where 1=1
+    </select>
+    <select id="findById" resultType="com.example.demo.vo.NoteInfoVo">
+        select note.*, userinfo.nickname as userName from note
+        left join userinfo on note.userId = userinfo.id
+        where note.id = #{id}
+    </select>
+    <select id="findByUserId" resultType="com.example.demo.vo.NoteInfoVo">
+        select note.*, userinfo.nickname as userName, userinfo.identity as identity
+        from note
+        left join userinfo on note.userId = userinfo.id
+        where userId = #{userId}
+    </select>
+</mapper>

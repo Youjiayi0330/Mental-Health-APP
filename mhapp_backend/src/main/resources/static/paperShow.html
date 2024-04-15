@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="content-type" content="no-cache, must-revalidate" />
+    <meta http-equiv="expires" content="Wed, 26 Feb 1997 08:21:57 GMT"/>
+    <title>问卷</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/font-awesome.css" rel="stylesheet"/>
+    <link href="css/basic.css" rel="stylesheet"/>
+    <link href="css/custom.css" rel="stylesheet"/>
+    <link href="css/my.css" rel="stylesheet"/>
+    <link href="https://cdn.quilljs.com/1.3.4/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.quilljs.com/1.3.4/quill.bubble.css" rel="stylesheet">
+    <link href="css/element/index.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">心理健康科普APP后台管理</a>
+        </div>
+
+        <div class="header-right">
+            <a href="javascript:void(0)" class="btn btn-info" title="退出登录">
+                <i class="fa fa-sign-out fa-2x"></i>
+            </a>
+        </div>
+
+        <div class="header-right" style="padding-top: 25px">欢迎你</div>
+
+        <div class="header-left">
+            <a href="index.html" class="btn btn-info" title="跳转到首页">
+                <i class="fa fa-dot-circle-o fa-2x"></i>
+            </a>
+        </div>
+    </nav>
+    <!-- /. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a href="index.html"><i class="fa fa-dashboard " ></i>系统首页</a>
+                </li>
+                <li>
+                    <a href="addPassage.html"><i class="fa fa-dashboard " ></i>添加文章</a>
+                </li>
+                <li>
+                    <a href="hasSended.html"><i class="fa fa-dashboard " ></i>已发送</a>
+                </li>
+                <li>
+                    <a href="draft.html"><i class="fa fa-dashboard " ></i>草稿箱</a>
+                </li>
+                <li>
+                    <a href="userInfo.html"><i class="fa fa-dashboard " ></i>用户管理</a>
+                </li>
+                <li>
+                    <a class="active-menu" href="paperShow.html"><i class="fa fa-dashboard " ></i>问卷管理</a>
+                </li>
+                <li>
+                    <a href="noteShow.html"><i class="fa fa-dashboard " ></i>社区管理</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <!-- /. ROW  -->
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <div class="nx-table-header">
+                            <button class="btn btn-sm btn-primary" @click="add()">新增</button>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover" style="margin-top: 20px">
+                            <thead>
+                            <tr>
+                                <th style="display: none">ID</th>
+                                <th>问卷名</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="(obj,index) in tableData" :key="obj.id">
+                                <td style="display: none">{{obj.id}}</td>
+                                <td>{{obj.paperTitle}}</td>
+                                <td>
+                                    <button class="btn btn-success btn-xs" @click="init(obj)">编辑</button>
+                                    <button class="btn btn-danger btn-xs" @click="del(obj.id)">删除</button>
+                                    <button class="btn btn-danger btn-xs" @click="addJudge(obj)">添加问卷判断</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item" v-bind:class="{ disabled: preActive }">
+                                    <a class="page-link" href="javascript:void(0)"
+                                       v-on:click="loadTable(pageInfo.pageNum - 1)">上一页</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0)" v-if="pageInfo.pageNum > 1" v-on:click="loadTable(pageInfo.pageNum - 1)">{{pageInfo.pageNum - 1}}</a>
+                                </li>
+                                <li class="page-item disabled">
+                                    <a class="page-link" aria-disabled="true" href="javascript:void(0)">{{pageInfo.pageNum}}</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="javascript:void(0)" v-if="pageInfo.hasNextPage" v-on:click="loadTable(pageInfo.pageNum + 1)">{{pageInfo.pageNum + 1}}</a>
+                                </li>
+                                <li class="page-item" v-bind:class="{ disabled: nextActive }">
+                                    <a class="page-link" href="javascript:void(0)" v-on:click="loadTable(pageInfo.hasNextPage? (pageInfo.pageNum + 1) : pageInfo.pageNum)">下一页</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.metisMenu.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/my.js"></script>
+<script src="js/vue2.6.11/vue.js"></script>
+<script src="js/vue2.6.11/axios.js"></script>
+<!--<script src="js/quill.js"></script>-->
+<script src="https://cdn.quilljs.com/1.3.4/quill.js"></script>
+<script src="https://cdn.quilljs.com/1.3.4/quill.min.js"></script>
+<script src="js/element/index.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    function msg(type, msg) {
+        Vue.prototype.$message({
+            type: type, // success（成功）、warning（警告）, error(错误)
+            message: msg,
+            duration: 2000,
+            offset: 100,
+            center: true,
+        })
+    }
+    let wrapper = new Vue({
+        el: '#wrapper' ,
+        data:{
+            tableData: [],
+            paper: {},
+            name:'',
+            pageInfo: {},
+            preActive: true,
+            nextActive: true,
+            currentPageNum: 0
+        },
+        created: function () {
+            this.currentPageNum=this.getQueryVariable('pageNum');
+            this.loadTable(this.currentPageNum);
+        },
+        methods: {
+            getQueryVariable(variable) {
+                let query = window.location.search.substring(1);
+                let vars = query.split("&");
+                for (let i = 0; i < vars.length; i++) {
+                    let pair = vars[i].split("=");
+                    if (pair[0] === variable) {
+                        return pair[1];
+                    }
+                }
+                return '1';
+            },
+            loadTable(pageNum) {
+                let url = "/popmh/paper/findAllPaper?pageNum="+pageNum;
+                axios.get(url).then(res => {
+                    if (res.data.code === '0') {
+                        this.tableData = res.data.data.list;
+                        this.pageInfo = res.data.data;
+                        this.preActive = !(this.pageInfo.hasPreviousPage);
+                        this.nextActive = !(this.pageInfo.hasNextPage);
+                    } else {
+                        msg('error', res.data.msg);
+                    }
+                });
+            },
+            add(){
+                window.location = 'dynamicForm.html';
+            },
+            init(obj){
+                this.paper = JSON.parse(JSON.stringify(obj));
+                let id = this.paper.id;
+                let name = this.paper.paperTitle;
+                window.location='updatePaperDetail.html?id='+id+"&name="+name;
+            },
+            addJudge(obj){
+                this.paper = JSON.parse(JSON.stringify(obj));
+                let id = this.paper.id;
+                let url = "/popmh/paperResultJudge/isExist/" + id;
+                axios.get(url).then(res => {
+                    if (res.data.code === '0'){ //有paperJudge,需更新
+                        window.location='updatePaperJudge.html?id='+id;
+                    } else { //无paperJudge，需添加
+                        window.location='addPaperJudge.html?id='+id;
+                    }
+                })
+
+            },
+            del:function (id) {
+                let _this = this;
+                this.$confirm('确认删除？', '系统提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    cancelButtonClass: 'btn-custom-cancel',
+                    type: 'warning'
+                }).then(function(){
+                    axios.delete("/popmh/paper/" + id ).then(res => {
+                        if (res.data.code === '0') {
+                            msg('success','删除成功');
+                            _this.loadTable(1);
+                        } else {
+                            msg('error', res.data.msg);
+                        }
+                    });
+                }).catch(function() {
+                    console.log("取消成功！");
+                });
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

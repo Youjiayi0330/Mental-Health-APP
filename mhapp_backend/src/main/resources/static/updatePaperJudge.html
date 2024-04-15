@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="css/element/index.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <meta charset="UTF-8">
+    <title>更新问卷判断</title>
+</head>
+<body>
+<div class="medical_treatment" id="sum">
+
+    <div id="milo" >
+        <form action="" method="post" autocomplete="off" id="checkBody"
+              style="margin-left: 10px; margin-top: 10px; background-color: #8cc5ff; display: none" >
+            <input id="paperJudgeId" type="text" name="paperJudgeId" style="display: none"/><br>
+            得分区间<input id="section" type="text" name="section" style="margin-left: 5px; background-color: #8cc5ff; border: none"/><br>
+            症状描述<input id="description" name="description" type="text" style="margin-left: 5px; width: 200px"><br>
+        </form>
+    </div>
+    <button id="submit" style="margin-left: 10px; margin-top: 20px; background-color: #f0ad4e; border-radius:3px; border:0px"
+            type="button" class="submit-button" >提交</button>
+</div>
+
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.metisMenu.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/my.js"></script>
+<script src="js/vue2.6.11/vue.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>-->
+<script src="js/vue2.6.11/axios.js"></script>
+<script src="js/quill.js"/>
+<script src="js/element/index.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+    function msg(type, msg) {
+        Vue.prototype.$message({
+            type: type, // success（成功）、warning（警告）, error(错误)
+            message: msg,
+            duration: 2000,
+            offset: 100,
+            center: true
+        })
+    }
+
+    let wrapper = new Vue({
+        data:{
+            paperId:'',
+        },
+        created: function () {
+            this.paperId = this.getQueryVariable("id");
+            this.loadData();
+        },
+        methods: {
+            getQueryVariable(variable) {
+                let query = window.location.search.substring(1);
+                let vars = query.split("&");
+                for (let i = 0; i < vars.length; i++) {
+                    let pair = vars[i].split("=");
+                    if (pair[0] === variable) {
+                        return pair[1];
+                    }
+                }
+                return '1';
+            },
+            loadData(){
+                loadPaperJudge(this.paperId);
+            }
+        }
+    })
+
+    function loadPaperJudge(paperId) {
+        console.log(paperId);
+        let paperJudgeList = [];
+        let url = "/popmh/paperResultJudge/findByPaperId/" + paperId;
+        axios.get(url).then(res => {
+            if (res.data.code === '0') {
+                paperJudgeList = res.data.data;
+                console.log(paperJudgeList);
+                let length = paperJudgeList.length;
+                console.log(length);
+                for(let i=0; i<length; i++){
+                    let paperJudge ={};
+                    paperJudge = paperJudgeList[i];
+                    let $form = $("#checkBody");
+                    let newForm = $form.clone();
+                    newForm.attr("id",'checkBody'+i);
+                    $("#milo").append(newForm);
+                    $("#"+"checkBody"+i).show();
+                    $("#"+"checkBody"+i).children("#paperJudgeId").val(paperJudge["id"]);
+                    $("#"+"checkBody"+i).children("#section").val(paperJudge["valueJudge"]);
+                    $("#"+"checkBody"+i).children("#description").val(paperJudge["description"]);
+                }
+            } else {
+                msg('error', res.data.msg);
+            }
+        });
+    }
+
+    $("#submit").click(function () {
+        let newData = []
+        let length = $("form").length ;
+        //获取子form表单的值
+        for (let i = 0; i < length; i++) {
+            if ($("#checkBody"+i).serialize() !== '') {
+                //根据id获取
+                let newFormData = $("#checkBody"+i).serializeArray();
+                console.log(newFormData);
+                //更加serializeArray获取后的格式重新拼装，方面后台处理数据
+                let newFormObj = {};
+                newFormObj["paperJudgeId"] = newFormData[0].value;
+                newFormObj["section"] = newFormData[1].value
+                newFormObj["description"] = newFormData[2].value;
+                newData.push(JSON.stringify(newFormObj))//追加数组  只追加不为空的form（未删除的form）
+                console.log(newData)
+            }
+        }
+        let checkBodyObj = {}
+        checkBodyObj.id = wrapper.$data.paperId;
+        checkBodyObj.name = wrapper.$data.paperId;
+        checkBodyObj.value = JSON.stringify(newData);
+        if(1==1){
+            axios.put(
+                "/popmh/paperResultJudge", checkBodyObj
+            ).then(res => {
+                if (res.data.code === '0') {
+                    msg('success', '修改成功');
+                } else {
+                    msg('error', res.data);
+                }
+            })
+        }
+    })
+
+</script>
+
+</body>
+</html>

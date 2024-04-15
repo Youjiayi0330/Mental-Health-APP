@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaperResult">
+
+    <TextView
+        android:id="@+id/paper_result_paperTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="5dp"
+        android:text="问卷名"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tv_result_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/paper_result_paperTitle"
+        android:text="测试结果"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:id="@+id/paper_result_judge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_result_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="无抑郁症"
+        android:textSize="30dp"/>
+
+    <Button
+        android:id="@+id/save_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="5dp"
+        android:background="@drawable/order_btn"
+        android:text="保存"
+        android:textColor="@color/white"
+        android:textSize="20dp"/>
+
+
+    <Button
+        android:id="@+id/back_paper_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/save_result"
+        android:layout_alignParentBottom="true"
+        android:text="返回测试首页"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:background="@android:color/transparent"/>
+
+</RelativeLayout>

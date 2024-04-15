@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/answer_false.xml" value="0.1" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/answer_radio.xml" value="0.1" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/answer_true.xml" value="0.1" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/banner.xml" value="0.145" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/comment_edt.xml" value="0.116" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/divider.xml" value="0.163" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/divider_v2.xml" value="0.163" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/doctor_tv.xml" value="0.104" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/editstyle.xml" value="0.1" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/indicator_select.xml" value="0.145" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/layout_comment.xml" value="0.125" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/long_edit.xml" value="0.187" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/note_bg.xml" value="0.116" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/order_btn.xml" value="0.1125" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/point_enabled.xml" value="0.1385" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/point_unabled.xml" value="0.1385" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/radio1.xml" value="0.1095" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/radio2.xml" value="0.1095" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/radio3.xml" value="0.1095" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/radio4.xml" value="0.1095" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/radio5.xml" value="0.1095" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/search.xml" value="0.145" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/drawable/user_tv.xml" value="0.152" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_add_note.xml" value="0.2" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_chat_main.xml" value="0.176" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_doctor_certify.xml" value="0.20820863616930313" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_doctor_detail.xml" value="0.2" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_main.xml" value="0.21182266009852216" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_my_collect.xml" value="0.20820863616930313" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_my_note.xml" value="0.20820863616930313" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_my_paper_test.xml" value="0.20820863616930313" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_note_detail.xml" value="0.176" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_paper_detail.xml" value="0.20820863616930313" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_paper_list.xml" value="0.2" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_paper_result.xml" value="0.16799999999999998" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_paper_result2.xml" value="0.20820863616930313" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_passage_detail.xml" value="0.176" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_register.xml" value="0.17552083333333332" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_reset_pwd.xml" value="0.20820863616930313" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_search_pasage.xml" value="0.20820863616930313" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/activity_user_detail.xml" value="0.20820863616930313" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/adapter_image.xml" value="0.18982471141513468" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/banner_1st_fg.xml" value="0.25364583333333335" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/banner_2nd_fg.xml" value="0.25364583333333335" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/banner_3rd_fg.xml" value="0.25364583333333335" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/banner_note_image.xml" value="0.15775972637879435" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/chat_bubble0.xml" value="0.264" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/chat_bubble1.xml" value="0.16" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/comment_edit_pop.xml" value="0.176" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/comment_visit_pop.xml" value="0.2" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/commnet_lv.xml" value="0.4" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/community_fg.xml" value="0.176" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/consult_fg.xml" value="0.176" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/doctor_lv.xml" value="0.17057291666666666" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/fragment_dashboard.xml" value="0.17057291666666666" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/fragment_home.xml" value="0.17057291666666666" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/fragment_notifications.xml" value="0.17057291666666666" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/item_ly.xml" value="0.152" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/layout_add_note.xml" value="0.20820863616930313" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/layout_gv.xml" value="0.2" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/main_fg.xml" value="0.152" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/message_fg.xml" value="0.2" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/message_list_item.xml" value="0.20820863616930313" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/my_paper_lv.xml" value="0.20820863616930313" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/paper_lv.xml" value="0.2" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/paper_viewpager.xml" value="0.20820863616930313" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/passage_lv.xml" value="0.128" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/reset_pwd.xml" value="0.20820863616930313" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/layout/user_fg.xml" value="0.2" />
+        <entry key="..\:/MyAndroidSpace/mentalHealth/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

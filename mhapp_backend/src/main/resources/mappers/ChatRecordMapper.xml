@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mappers.ChatRecordMapper">
+    <select id="getChatRecord" resultType="com.example.demo.entity.ChatRecord">
+        select * from chat_record
+        where (personId = #{from} and friendId = #{to}) or (personId = #{to} and friendId = #{from})
+    </select>
+
+    <select id="getChatRecordByPersonId" resultType="com.example.demo.entity.ChatRecord">
+        select * from chat_record
+        where personId = #{id} or friendId = #{id}
+    </select>
+
+    <update id="setOneFriendHasRead">
+        update chat_record
+        set hasRead = 1
+        where hasRead = 0 and personId = #{from} and friendId = #{to}
+    </update>
+
+    <update id="setNewHasReadById">
+        update chat_record
+        set hasRead = 1
+        where id = #{id}
+    </update>
+</mapper>

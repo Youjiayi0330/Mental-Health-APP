@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mentalhealth">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".doctor_certify"
+            android:exported="false" />
+        <activity
+            android:name=".MyNote"
+            android:exported="false" />
+        <activity
+            android:name=".UserDetail"
+            android:exported="false" />
+        <activity
+            android:name=".ResetPwd"
+            android:exported="false" />
+        <activity
+            android:name=".MyCollect"
+            android:exported="false" />
+        <activity
+            android:name=".SearchPasage"
+            android:exported="false" />
+        <activity
+            android:name=".MyPaperTest"
+            android:exported="false" />
+        <activity
+            android:name=".PaperResult"
+            android:exported="false" />
+        <activity
+            android:name=".paperDetail"
+            android:exported="false" />
+        <activity
+            android:name=".PaperList"
+            android:exported="false" />
+        <activity
+            android:name=".noteDetail"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".AddNote"
+            android:exported="false" />
+        <activity
+            android:name=".ChatMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".doctorDetail"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".passageDetail"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.donkingliang.imageselector.ImageSelectorActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name="com.donkingliang.imageselector.PreviewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name="com.donkingliang.imageselector.ClipImageActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+    </application>
+
+</manifest>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/teal_700">
+
+        <android.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/search"
+            android:iconifiedByDefault="true"
+            android:queryHint="输入文章标题"  />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/banner"
+                    android:layout_width="280dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="5dp">
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/view_pager"
+                        android:layout_width="320dp"
+                        android:layout_height="match_parent"
+                        android:layout_centerHorizontal="true"/>
+
+                    <LinearLayout
+                        android:id="@+id/point_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentBottom="true">
+                    </LinearLayout>
+                </RelativeLayout>
+                <Button
+                    android:id="@+id/mental_test"
+                    android:layout_width="100dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/notebook"
+                    android:layout_toRightOf="@+id/banner"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/mental_test"
+                    android:layout_alignLeft="@+id/mental_test"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="心理测试"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"/>
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/passagelist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="#CFCFCF"
+                android:dividerHeight="2dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>
